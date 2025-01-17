@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta nadevice-widthme="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        name =prompt("이름을 입력하세요","여기에 입력")
+        document.write("당신의 이름은 : ", name + "<br>") 
+        console.log(name)
+        kuk = prompt("국어점수를 입력하세요", "0")
+        document.write("국어점수 : "+kuk +"<br>")
+        mat = prompt("수학학점수를 입력하세요", "0")
+        document.write("수학점수 : "+mat+"<br>")
+        eng = prompt("영어점수를 입력하세요", "0")
+        document.write("수학점수 : "+eng+"<br>")
+        sum = Number(kuk) + Number(mat) + eng*1//이거를 넣어주면 총합 부분이 다 합쳐서 나온다
+        document.write("총점 : "+ sum + "<br>")
+        avg =sum /3
+        document.write("평균 : "+avg + "<br>")
+        final = avg >90 ? document.write("합격"):document.write("불합격")
+    </script>
+    
+</body>
+</html>

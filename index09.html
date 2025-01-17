@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<style>
+    .img1{
+        width: 200px;
+        height: 200px;
+    }
+</style>
+    <button type="button" onclick="game(1)"><img src ="1.ing"class="img1"></button>
+    <button type="button" onclick="game(2)"><img src ="2.ing"class ="img1"></button>
+    <button type="button" onclick="game(3)"><img src= "3.ing"class= "img1"></button>
+
+    <script>
+        com =Math.floor((math.random() * 3))+1
+        console.log(com)
+        function game(saram){
+            if(saram == 1){
+                document.write("사람 : 가위<br>")
+                if(com == 1){
+                    documen.write("컴퓨터 : 가위<br>")
+                    documen.write("모두 비겼습니다")
+                }
+                else if(com == 2){
+                     document.write("컴퓨터 : 바위<br>")
+                     document.write("컴퓨터가가 이겼습니다<br>")
+                     document.write("img")
+                }
+                else{ 
+                    document.write("컴퓨터 : 보<br>")
+                    document.write("사람이 이겼습니다.<br>")
+                }
+            }
+            else if(saram ==2){
+                document.write("사람 : 바위<br>")
+                if(com == 1){
+                    document.write("컴퓨터 : 가위<br>")
+                    document.write("사람이 이겼습니다.")
+                }
+                else if(com==2){
+                     document.write("컴퓨터 : 바위<br>")
+                     document.write("모두가 비비겼습니다.<br>")
+                }    
+                else{
+                    document.write("컴퓨터 : 보<br>")
+                    document.write("컴퓨터가 이겼습니다.<br>")
+                    document.write("img")
+                }
+
+            if(com==1){
+                document.write("컴퓨터 : 가위<br>")
+                document.write("컴퓨터가 이겼습니다.<br>")
+                document.write("")
+            }
+            else if(com ==2){
+                document.write("컴퓨터 : 바위<br>")
+                document.write("사람이 이겼습니다.<br>")
+            }
+            else{
+                document.write("컴퓨터 : 보<br>")
+                document.write("모두 비겼습니다.<br>")
+            }
+        }    
+    }
+    </script>
+</body>
+</html>

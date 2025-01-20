@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .ip1{
+        width: 70px;
+        height: 70px;
+        font-size: 50px;
+        color:brown;
+        text-align: right;
+        border-radius: 30%;
+        border-width: 5px; 
+        border-color:chartreuse;
+    }
+    button{
+        width :70px;
+        height: 35px;
+    }
+</style>
+<body>
+    <input type="text"id="input1"class="ip1">
+    <input type="text"id="input2"class="ip1">
+    <br>
+    <button type="button" onclick="run()">계산</button>
+    <button type="button" onclick="reset()">초기화</button>
+    <br>
+    <input type="text" id="answer">
+    <script>
+        function run(){
+            a = input1.value 
+            b = input2.value
+            sum = Number(a) + Number(b)
+            answer.value= sum
+            input1.value=''
+            input2.value=''
+        }
+        function reset(){
+            answer.value=''
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        chk1 =false
+        chk2=false
+        arURL=["naver.com","gmail.com","daumnet","nate.com","hanmail.net"]
+
+        userEmail = prompt("이메일 주소를 입력하세요","")
+
+        if(userEmail.indexOf("@")>0){
+            chk1=true
+        }
+        for(i=0;i<arURL.length;i++){
+            if(userEmail.indexOf(arURL[i])>-1){
+                chk2=true
+            }
+        }
+        if(chk1 && chk2){
+            document.write("당신의 이메일 : "+userEmail+"은 형식이 맞습니다.")
+        }
+        else{
+            alert("이메일 형식이 유효하지 않습니다. 다시 입력하시길 바랍니다.")
+            location.reload()//새로고침
+        }
+    </script>
+    
+</body>
+</html>

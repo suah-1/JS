@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .btn_1{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border-color:aqua;
+        }
+        .btn_1:hover{
+            background-color: brown;
+        }
+    </style>
+
+        <tr>
+            <td colspan="4"><input type="text" id="input"></td>
+        </tr>
+        <tr>
+            <td><button onclick="handle('+')">+</button></td>
+            <td><button onclick="hanble('-')">-</button></td>
+            <td><button onclick="hanble('*')">*</button></td>
+            <td><button onclick="hanble('/')">/</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="hanble()">7</button></td>
+            <td><button onclick="hanble()">8</button></td>
+            <td><button onclick="hanble()">9</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="hanble()">4</button></td>
+            <td><button onclick="hanble()">5</button></td>
+            <td><button onclick="hanble()">6</button></td>
+            <td rowspan="2"><button onclick="run()">=</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="hanble()">1</button></td>
+            <td><button onclick="hanble()">2</button></td>
+            <td><button onclick="hanble()">3</button></td>
+            
+        </tr>
+    </table>
+    <script>
+        ar=[]
+        function run(){
+            input.value = eval(input.value)
+            ar=[]
+        }
+        function plus(){
+            ar.push('+')
+            input.value = ar.join('')
+        }
+        function minus(){
+            ar.push('-')
+            input.value = ar.join('')
+        }
+        function product(){
+            ar.push('*')
+            input.value = ar.join('')
+        }
+        function divide(){
+            ar.push('/')
+            input.value = ar.join('')
+        }
+        function btn1(){
+            ar.push(1)
+            input.value = ar.join('')
+        }
+        function btn2(){
+            ar.push(2)
+            input.value = ar.join('')
+        }
+        function btn3(){
+            ar.push(3)
+            input.value = ar.join('')
+        }
+        function btn4(){
+            ar.push(4)
+            input.value = ar.join('')
+        }
+        function btn5(){
+            ar.push(5)
+            input.value = ar.join('')
+        }
+        function btn6(){
+            ar.push(6)
+            input.value = ar.join('')
+        }
+        function btn7(){
+            ar.push(7)
+            input.value = ar.join('')
+        }
+        function btn8(){
+            ar.push(8)
+            input.value = ar.join('')
+        }
+        function btn9(){
+            ar.push(9)
+            input.value = ar.join('')
+        }
+    </script>
+</body>
+</html>

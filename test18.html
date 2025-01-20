@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        input{
+            height: 40px;
+        }
+        .btn_1{
+            width: 40px;
+            height: 40px;
+            border-radius: 0%;
+            border-color:rgb(5, 14, 49);
+        }
+        .btn_1:hover{
+            background-color: rgb(115, 8, 8);
+        }
+    </style>
+<table>
+        <tr>
+            <td colspan="4"><input type="text" id="input"></td>
+            
+        </tr>
+        <tr>
+            <td><button onclick="plus('+')"class="btn_1">+</button></td>
+            <td><button onclick="minus('-')"class="btn_1">-</button></td>
+            <td><button onclick="product('*')"class="btn_1">*</button></td>
+            <td><button onclick="divide('/')"class="btn_1">/</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="btn7('7')"class="btn_1">7</button></td>
+            <td><button onclick="btn8('8')"class="btn_1">8</button></td>
+            <td><button onclick="btn9('9')"class="btn_1">9</button></td>
+            <td><button onclick="btnreset('reset')"class="btn_1">AC</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="btn4('4')"class="btn_1">4</button></td>
+            <td><button onclick="btn5('5')"class="btn_1">5</button></td>
+            <td><button onclick="btn6('6')"class="btn_1">6</button></td>
+            <td><button onclick="back()"class="btn_1">⌫</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="btn1('1')"class="btn_1">1</button></td>
+            <td><button onclick="btn2('2')"class="btn_1">2</button></td>
+            <td><button onclick="btn3('3')"class="btn_1">3</button></td>
+            <td><button onclick="run()"class="btn_1">=</button></td>
+        </tr>
+    </table>
+    <script>
+        ar=[]
+        function run(){
+            input.value = eval(input.value)
+            ar=[]
+        }
+        function plus(){
+            ar.push('+')
+            input.value = ar.join('')
+        }
+        function minus(){
+            ar.push('-')
+            input.value = ar.join('')
+        }
+        function product(){
+            ar.push('*')
+            input.value = ar.join('')
+        }
+        function divide(){
+            ar.push('/')
+            input.value = ar.join('')
+        }
+        function btn1(){
+            ar.push(1)
+            input.value = ar.join('')
+        }
+        function btn2(){
+            ar.push(2)
+            input.value = ar.join('')
+        }
+        function btn3(){
+            ar.push(3)
+            input.value = ar.join('')
+        }
+        function btn4(){
+            ar.push(4)
+            input.value = ar.join('')
+        }
+        function btn5(){
+            ar.push(5)
+            input.value = ar.join('')
+        }
+        function btn6(){
+            ar.push(6)
+            input.value = ar.join('')
+        }
+        function btn7(){
+            ar.push(7)
+            input.value = ar.join('')
+        }
+        function btn8(){
+            ar.push(8)
+            input.value = ar.join('')
+        }
+        function btn9(){
+            ar.push(9)
+           input.value = ar.join('')
+        }
+        function btnreset(){
+            ar.pop()
+            input.value = ar.join('')
+        }
+        function back(){
+            document.getElementById('input').value = "";
+            input.value = ar.join('')
+        }
+    </script>
+</body>
+</html>

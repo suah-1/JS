@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .menuimg{
+        width: 370px;
+        height: 300px;
+    }
+    body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: image-set("dk.png");
+    }
+
+ header {
+            text-align: left;
+            background-color: #ffffff; 
+            color: #070708;
+ }
+ .div_body{
+    background-color: #ffffff;
+    width: 2052px;
+ }
+</style>
+<body>
+    <div class="div_body">
+    <header>
+        <h1>생과일 주스가게</h1>
+    </header>
+    <table border=1>
+    <tr align="center">
+        <td><img src="toma.png" class="menuimg" id="toma"></td>
+        <td rowspan="4" width="130px" align="left"> 
+            <input type="checkbox" id="toma_fruit" onclick="toma_updatePrice('fruit')"><h3>과일</h3><br>
+            <input type="checkbox" id="toma_suger"onclick="toma_updatePrice('suger')"><h3>설탕</h3><br>
+            <input type="checkbox" id="toma_gelato"onclick="toma_updatePrice('Gelato')"><h3>젤라또</h3><br>
+
+        <td><img src="grr.png" class="menuimg" id="grr"></td>
+        <td rowspan="4" width="130px" align="left">
+            <input type="checkbox" id="grr_fruit"onclick="grr_updatePrice('fruit')"><h3>과일</h3><br>
+            <input type="checkbox" id="grr_suger"onclick="grr_updatePrice('suger')"><h3>설탕</h3><br>
+            <input type="checkbox" id="grr_gelato"onclick="grr_updatePrice('Gelato')"><h3>젤라또</h3><br>5
+            </td>
+        <td><img src="ki.png" class="menuimg" id="ki"></td>
+        <td rowspan="4" width="130px" align="left">
+            <input type="checkbox" id="ki_fruit"onclick="ki_updatePrice('fruit')"><h3>과일</h3><br>
+            <input type="checkbox" id="ki_suger"onclick="ki_updatePrice('suger')"><h3>설탕</h3><br>
+            <input type="checkbox" id="ki_gelato"onclick="ki_updatePrice('Gelato')"><h3>젤라또</h3><br>
+            </td>
+        <td><img src="sw.png" class="menuimg" id="sw"></td>
+        <td rowspan="4" width="130px" align="left">
+            <input type="checkbox" id="sw_fruit"onclick="sw_updatePrice('fruit')"><h3>과일</h3><br>
+            <input type="checkbox" id="sw_suger"onclick="sw_updatePrice('suger')"><h3>설탕</h3><br>
+            <input type="checkbox" id="sw_gelato"onclick="sw_updatePrice('Gelato')"><h3>젤라또</h3><br>
+            </td>   
+    </tr>
+    <tr>
+        <td align="left">
+            <input type="text" value="토마토주스" id="tomamenu">
+        </td>
+        <td align="left">
+            <input type="text" value="포도주스" id="grrmenu">
+        </td>
+        <td align="left">
+            <input type="text" value="키위주스" id="kimenu">
+        </td>
+        <td align="left">
+            <input type="text" value="딸기주스" id="swmenu">
+        </td>
+     </tr>
+     <tr align="center">
+        <td><input type="radio" name = "toma_type" checked="checked" value="ice" onclick="tomaswImg('ice')">ICE</td>
+        <td><input type="radio" name = "grr_type" checked="checked" value="ice" onclick="grrswImg('ice')">ICE</td>
+        <td><input type="radio" name = "ki_type" checked="checked" value="ice" onclick="kiswImg('ice')">ICE</td>
+        <td><input type="radio" name = "sw_type" checked="checked" value="ice" onclick="swswImg('ice')">ICE</td>
+    </tr>
+    <tr align="center">
+        <td>가격<input type="text" value="4000" id="tomacash"></td>
+        <td>가격<input type="text" value="4500" id="grrcash"></td>
+        <td>가격<input type="text" value="5000" id="kicash"></td>
+        <td>가격<input type="text" value="4500" id="swcash"></td>
+    </tr>
+    </table>
+    <table border=1>
+        <td><img src="mango.png" class="menuimg" id="mango"></td>
+        <td rowspan="4" width="130px" align="left">
+            <input type="checkbox" id="mango_fruit"onclick="mango_updatePrice('fruit')"><h3>과일</h3><br>
+            <input type="checkbox" id="mango_suger"onclick="mango_updatePrice('suger')"><h3>설탕</h3><br>
+            <input type="checkbox" id="mango_gelato"onclick="mango_updatePrice('Gelato')"><h3>젤라또</h3><br>
+            </td>
+
+        <td><img src="or.png" class="menuimg" id="or"></td>
+        <td rowspan="4" width="130px" align="left">
+            <input type="checkbox" id="or_fruit"onclick="or_updatePrice('fruit')"><h3>과일</h3><br>
+            <input type="checkbox" id="or_suger"onclick="or_updatePrice('suger')"><h3>설탕</h3><br>
+            <input type="checkbox" id="or_gelato"onclick="or_updatePrice('Gelato')"><h3>젤라또</h3><br>
+            </td>
+        <td><img src="sbbb.png" class="menuimg" id="sb"></td>
+        <td rowspan="4" width="130px" align="left">
+            <input type="checkbox" id="sbbb_fruit"onclick="sbbb_updatePrice('fruit')"><h3>과일</h3><br>
+            <input type="checkbox" id="sbbb_suger"onclick="sbbb_updatePrice('suger')"><h3>설탕</h3><br>
+            <input type="checkbox" id="sbbb_gelato"onclick="sbbb_updatePrice('Gelato')"><h3>젤라또</h3><br>
+            </td>
+        <td><img src="apple.png" class="menuimg" id="apple"></td>
+        <td rowspan="4" width="130px" align="left">
+            <input type="checkbox" id="apple_fruit"onclick="apple_updatePrice('fruit')"><h3>과일</h3><br>
+            <input type="checkbox" id="apple_suger"onclick="apple_updatePrice('suger')"><h3>설탕</h3><br>
+            <input type="checkbox" id="apple_gelato"onclick="apple_updatePrice('Gelato')"><h3>젤라또</h3><br>
+        </td>
+    </tr>
+    <tr>
+        <td align="left">
+            <input type="text" value= "망고주스" id="mangomenu">
+        </td>
+        <td align="left">
+            <input type="text" value="오렌지주스" id="ormenu">
+        </td>
+        <td align="left">
+            <input type="text" value="수박주스" id="sbbbmenu">
+        </td>
+        <td align="left">
+            <input type="text" value="사과주스" id="applemenu">
+        </td>
+    </tr>
+    <tr align="center">
+        <td><input type="radio" name = "mango_type" checked="checked" value="ice" onclick="mangoswImg('ice')">ICE</td>
+        <td><input type="radio" name = "or_type" checked="checked" value="ice" onclick="orswImg('ice')">ICE</td>
+        <td><input type="radio" name = "sbbb_type" checked="checked" value="ice" onclick="sbbbswImg('ice')">ICE</td>
+        <td><input type="radio" name = "apple_type" checked="checked" value="ice" onclick="appleswImg('ice')">ICE</td>
+    </tr>
+    <tr align="center">
+        <td>가격<input type="text" value="4000" id="mangocash"></td>
+        <td>가격<input type="text" value="4500" id="orcash"></td>
+        <td>가격<input type="text" value="5000" id="sbbbcash"></td>
+        <td>가격<input type="text" value="4500" id="applecash"></td>
+    </tr>
+    </table>
+    <script>
+        function toma_updatePrice(toma_chk){
+            baseCash = Number(document.getElementById("tomacash").value)
+            addPrice = 0
+            console.log(toma_chk)
+            if(toma_chk =='fruit'){
+                if(document.getElementById("toma_fruit").checked) addPrice +=3500
+                else if(!document.getElementById("toma_fruit").checked )addPrice -=3500
+            }
+            else if(toma_chk =='suger'){
+                if(document.getElementById("toma_suger").checked) addPrice += 500
+                else if(!document.getElementById("toma_suger").checked) addPrice -= 500
+            }
+            else if(toma_chk =='Gelato'){
+                if(document.getElementById("toma_gelato").checked) addPrice += 1000
+                else if(!document.getElementById("toma_gelato").checked) addPrice -= 1000
+            }
+
+            document.getElementById("tomacash").value = baseCash + addPrice
+        }
+        function gr_updatePrice(gr_chk){
+            baseCash = Number(document.getElementById("grcash").value)
+            addPrice = 0
+            console.log(gr_chk)
+            if(gr_chk == 'fruit'){
+                if(document.getElementById("gr_fruit").checked)addPrice +=3500
+                else if(!document.getElementById("gr_fruit").checked)addPrice -=3500
+            }
+            else if(gr_chk == 'suger'){
+                if(document.getElementById("gr_suger").checked) addPrice += 500
+                else if(!document.getElementById("gr_suger").checked) addPrice -= 500
+            }
+            else if(gr_chk == 'Gelato'){
+                if(document.getElementById("gr_gelato").checked) addPrice += 1000
+                else if(!document.getElementById("gr_gelato").checked) addPrice -= 1000
+            }
+            
+            document.getElementById("grcash").value = baseCash + addPrice
+        }
+        function ki_updatePrice(ki_chk){
+            baseCash = Number(document.getElementById("kicash").value)
+            addPrice = 0
+            console.log(ki_chk)
+            if(ki_chk == 'fruit'){
+                if(document.getElementById("ki_fruit").checked)addPrice +=3500
+                else if(!document.getElementById("ki_fruit").checked)addPrice -=3500
+            }
+            else if(ki_chk == 'suger'){
+                if(document.getElementById("ki_suger").checked) addPrice += 500
+                else if(!document.getElementById("ki_suger").checked) addPrice -= 500
+            }
+            else if(ki_chk == 'Gelato'){
+                if(document.getElementById("ki_gelato").checked) addPrice += 1000
+                else if(!document.getElementById("ki_gelato").checked) addPrice -= 1000
+            }
+            
+            document.getElementById("kicash").value = baseCash + addPrice
+        }
+        function sw_updatePrice(sw_chk){
+            baseCash = Number(document.getElementById("swcash").value)
+            addPrice = 0
+            console.log(sw_chk)
+            if(sw_chk == 'fruit'){
+                if(document.getElementById("sw_fruit").checked)addPrice +=3500
+                else if(!document.getElementById("sw_fruit").checked)addPrice -=3500
+            }
+            else if(sw_chk == 'suger'){
+                if(document.getElementById("sw_suger").checked) addPrice += 500
+                else if(!document.getElementById("sw_suger").checked) addPrice -= 500
+            }
+            else if(sw_chk == 'Gelato'){
+                if(document.getElementById("sw_gelato").checked) addPrice += 1000
+                else if(!document.getElementById("sw_gelato").checked) addPrice -= 1000
+            }
+            
+            document.getElementById("swcash").value = baseCash + addPrice
+        }
+        function mango_updatePrice(mango_chk){
+            baseCash = Number(document.getElementById("mangocash").value)
+            addPrice = 0
+            console.log(mango_chk)
+            if(mango_chk == 'fruit'){
+                if(document.getElementById("mango_fruit").checked)addPrice +=3500
+                else if(!document.getElementById("mango_fruit").checked)addPrice -=3500
+            }
+            else if(mango_chk == 'suger'){
+                if(document.getElementById("mango_suger").checked) addPrice += 500
+                else if(!document.getElementById("mango_suger").checked) addPrice -= 500
+            }
+            else if(mango_chk == 'Gelato'){
+                if(document.getElementById("mango_gelato").checked) addPrice += 1000
+                else if(!document.getElementById("mango_gelato").checked) addPrice -= 1000
+            }
+            
+            document.getElementById("mangocash").value = baseCash + addPrice
+        }
+        function or_updatePrice(or_chk){
+            baseCash = Number(document.getElementById("orcash").value)
+            addPrice = 0
+            console.log(or_chk)
+            if(or_chk == 'fruit'){
+                if(document.getElementById("or_fruit").checked)addPrice +=3500
+                else if(!document.getElementById("or_fruit").checked)addPrice -=3500
+            }
+            else if(or_chk == 'suger'){
+                if(document.getElementById("or_suger").checked) addPrice += 500
+                else if(!document.getElementById("or_suger").checked) addPrice -= 500
+            }
+            else if(or_chk == 'Gelato'){
+                if(document.getElementById("or_gelato").checked) addPrice += 1000
+                else if(!document.getElementById("or_gelato").checked) addPrice -= 1000
+            }
+            
+            document.getElementById("orcash").value = baseCash + addPrice
+        }
+        function sb_updatePrice(sb_chk){
+            baseCash = Number(document.getElementById("sbcash").value)
+            addPrice = 0
+            console.log(sb_chk)
+            if(sb_chk == 'fruit'){
+                if(document.getElementById("sb_fruit").checked)addPrice +=3500
+                else if(!document.getElementById("sb_fruit").checked)addPrice -=3500
+            }
+            else if(sb_chk == 'suger'){
+                if(document.getElementById("sb_suger").checked) addPrice += 500
+                else if(!document.getElementById("sb_suger").checked) addPrice -= 500
+            }
+            else if(sb_chk == 'Gelato'){
+                if(document.getElementById("sb_gelato").checked) addPrice += 1000
+                else if(!document.getElementById("sb_gelato").checked) addPrice -= 1000
+            }
+            
+            document.getElementById("sbcash").value = baseCash + addPrice
+        }
+        function apple_updatePrice(apple_chk){
+            baseCash = Number(document.getElementById("applecash").value)
+            addPrice = 0
+            console.log(apple_chk)
+            if(apple_chk == 'fruit'){
+                if(document.getElementById("apple_fruit").checked)addPrice +=3500
+                else if(!document.getElementById("apple_fruit").checked)addPrice -=3500
+            }
+            else if(apple_chk == 'suger'){
+                if(document.getElementById("apple_suger").checked) addPrice += 500
+                else if(!document.getElementById("apple_suger").checked) addPrice -= 500
+            }
+            else if(apple_chk == 'Gelato'){
+                if(document.getElementById("apple_gelato").checked) addPrice += 1000
+                else if(!document.getElementById("apple_gelato").checked) addPrice -= 1000
+            }
+            
+            document.getElementById("applecash").value = baseCash + addPrice
+        }
+
+        function tomaswImg(toma_Type){
+            var Type = toma_Type
+            money = Number(document.getElementById("tomacash").value)
+            if(Type=="ice"){
+                document.getElementById("tomaimg").src="toma.png"
+                document.getElementById("tomamenu").value="토마토주스(ICE)"
+                document.getElementById("tomacash").value= money+=3500
+            }
+        } 
+    </script>
+ 
+    <section class="menu_contiainer">
+        <div class="menu">
+            <div class="menu_img toma"></div>
+            <div class="menu_name"></div>       
+        </div>
+        <div class="menu">
+            <div class="menu_img apple"></div>
+            <div class="menu_name"></div>       
+        </div>
+        <div class="menu">
+            <div class="menu_img grr"></div>
+            <div class="menu_name"></div>       
+        </div>
+        <div class="menu">
+            <div class="menu_img sbbb"></div>
+            <div class="menu_name"></div>       
+        </div>
+
+        <div class="menu">
+            <div class="menu_img sw"></div>
+            <div class="menu_name"></div>       
+        </div>
+        <div class="menu">
+            <div class="menu_img mango"></div>
+            <div class="menu_name"></div>       
+        </div>
+        <div class="menu">
+            <div class="menu_img ki"></div>
+            <div class="menu_name"></div>       
+        </div>
+        <div class="menu">
+            <div class="menu_img or"></div>
+            <div class="menu_name"></div>       
+        </div>
+        </tr>
+    </section>
+    <section class="order?container">
+        <div class="selected">
+            <div class="selected_menu">
+                <div class="selected_menu_image"></div>
+                <divclass="selected_menu_name"></div>
+            </div>
+        </div>
+        <div class="order_detail">
+            <div class="order size"></div>
+            <div class="order ice"></div>
+            <div class="order quantity"></div>
+        </div>
+    </section>
+</div>
+</body>

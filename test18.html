@@ -109,11 +109,11 @@
            input.value = ar.join('')
         }
         function btnreset(){
-            ar.pop()
+            document.getElementById('input').value = "";
             input.value = ar.join('')
         }
         function back(){
-            document.getElementById('input').value = "";
+            ar.pop()
             input.value = ar.join('')
         }
     </script>

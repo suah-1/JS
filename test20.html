@@ -7,30 +7,77 @@
 </head>
 <style>
     .menuimg{
-        width: 370px;
-        height: 300px;
+        width: 200px;
+        max-width: 200px;
+        height: auto;
+        border-radius: 8px;
+        object-fit: cover;
     }
+
     body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-image: image-set("dk.png");
     }
 
  header {
-            text-align: left;
-            background-color: #ffffff; 
-            color: #070708;
+            text-align: center;            
+            color: #000000;
+            padding: 5px 0;
+            font-size: 24px;
+            background-color: #fff;
  }
  .div_body{
-    background-color: #ffffff;
-    width: 2052px;
- }
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 1500px;
+    height: 1000px;
+    padding: 10px;
+    background-image: image-set("swer.png");
+}
+
+    table{
+        width: 90;
+        margin: 20px auto;
+        max-width: 1200;
+        border-collapse: collapse;
+        box-shadow: 0 4px 6px #da7e62fc;
+    }
+
+    table tr:nth-child(even){
+        background-color: #eb6f49;
+    }
+    table tr:hover{
+        background-color: #e8d7d7;
+    }
+    input[type="text"]{
+        width:80%;
+        padding: 5px;
+        margin: 5px 0; 
+    }
+    input[type="checkbox"],input[type="radio"]{
+        margin-right: 10px;
+    }
+    button{
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 15px 11px;
+        margin-top: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover{
+        background-color: #0056b3;
+    }
+ 
+ 
 </style>
 <body>
     <div class="div_body">
     <header>
-        <h1>생과일 주스가게</h1>
+        <h3>생과일 주스가게</h3>
     </header>
     <table border=1>
     <tr align="center">

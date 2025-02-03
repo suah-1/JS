@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #FFF1FA;
+            display: flex;
+        }
+        .exam-section {
+            flex: 1;
+            margin-right: 320px; /* OMR 패널 크기만큼 여백 */
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .submit-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* ✅ OMR 고정 스타일 */
+        .omr-section {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            height: 90vh;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            overflow-y: auto;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .omr-sheet {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .omr-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .omr-question {
+            font-weight: bold;
+            cursor: pointer;
+            margin-right: 10px;
+            color: deeppink;
+        }
+        .omr-question:hover {
+            text-decoration: underline;
+        }
+        .omr-option {
+            margin: 0 5px;
+            cursor: pointer;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid deeppink;
+            text-align: center;
+            line-height: 25px;
+            font-weight: bold;
+        }
+        .selected {
+            background-color: deeppink;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="exam-section">
+        <h1>2025년도 제 1회 정보처리기사 문제</h1>
+        <div id="exam-container">Loading...</div>
+        <button class="submit-btn" onclick="submitAnswers()">제출하기</button>
+    </div>
+    <div class="omr-section">
+        <h2 style="text-align: center; font-size: 35px;">답 안 지</h2>
+        <div id="omr-container" class="omr-sheet"></div>
+    </div>
+
+    <script>
+        let questions = [];
+
+        async function loadQuestions() {
+            try {
+                const response = await fetch("questions.json");
+                questions = await response.json();
+                renderQuestions();
+                renderOMR();
+            } catch (error) {
+                console.error("문제를 불러오는 중 오류 발생:", error);
+                document.getElementById("exam-container").innerHTML = "문제를 불러오는 데 실패했습니다.";
+            }
+        }
+
+        function renderQuestions() {
+            const examContainer = document.getElementById("exam-container");
+            examContainer.innerHTML = "";
+
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement("div");
+                questionDiv.className = "question";
+                questionDiv.id = `question-${index}`;
+                questionDiv.innerHTML = `
+                    <p><strong>${index + 1}. ${q.question}</strong></p>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <label>
+                                <input type="radio" name="question-${q.id}" value="${i}" onchange="updateOMR(${index}, ${i})">
+                                ${option}
+                            </label>
+                        `).join("")}
+                    </div>
+                `;
+                examContainer.appendChild(questionDiv);
+            });
+        }
+
+        function renderOMR() {
+            const omrContainer = document.getElementById("omr-container");
+            omrContainer.innerHTML = "";
+
+            questions.forEach((q, index) => {
+                const omrRow = document.createElement("div");
+                omrRow.className = "omr-row";
+
+                omrRow.innerHTML = `
+                    <span class="omr-question" onclick="scrollToQuestion(${index})">${index + 1}.</span>
+                    ${q.options.map((_, i) => `
+                        <div class="omr-option" id="omr-${index}-${i}" onclick="selectOMR(${index}, ${i})">${i + 1}</div>
+                    `).join("")}
+                `;
+
+                omrContainer.appendChild(omrRow);
+            });
+        }
+
+        function updateOMR(questionIndex, selectedIndex) {
+            for (let i = 0; i < questions[questionIndex].options.length; i++) {
+                document.getElementById(`omr-${questionIndex}-${i}`).classList.remove("selected");
+            }
+            document.getElementById(`omr-${questionIndex}-${selectedIndex}`).classList.add("selected");
+
+            const radios = document.getElementsByName(`question-${questions[questionIndex].id}`);
+            radios[selectedIndex].checked = true;
+        }
+
+        function selectOMR(questionIndex, selectedIndex) {
+            updateOMR(questionIndex, selectedIndex);
+        }
+
+        function scrollToQuestion(index) {
+            const questionElement = document.getElementById(`question-${index}`);
+            if (questionElement) {
+                questionElement.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+        }
+
+        function submitAnswers() {
+            const results = questions.map(q => {
+                const selected = document.querySelector(`input[name="question-${q.id}"]:checked`);
+                return {
+                    id: q.id,
+                    question: q.question,
+                    selectedAnswer: selected ? q.options[parseInt(selected.value)] : "선택 안함",
+                    correctAnswer: q.options[q.correct-1],
+                    isCorrect: selected ? parseInt(selected.value) === q.correct-1 : false
+                };
+            });
+
+            localStorage.setItem("examResults", JSON.stringify(results));
+            window.location.href = "result.html";
+        }
+
+        loadQuestions();
+    </script>
+</body>
+</html>

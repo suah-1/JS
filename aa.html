@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인 페이지</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .background {
+      background: url('tree.jpg') no-repeat center center/cover;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .login-container {
+      margin: auto;
+      width: 90%;
+      max-width: 400px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .login-form button:hover {
+      background-color: #0056b3;
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+
+    .social-login button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    .google {
+      background-color: #DB4437;
+    }
+
+    .signup-link {
+      display: block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #007BFF;
+    }
+
+    .signup-link:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 10px;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="login-container">
+      <h1></h1>
+      <form class="login-form">
+        <input type="text" placeholder="Username" required />
+        <input type="password" placeholder="Password" required />
+        <button type="submit">로그인</button>
+        <a href="#" class="signup-link">회원가입</a>
+      </form>
+    </div>
+    <footer class="footer">
+        <p> 백호의 발톱 | 경기 화성시 병점3로 12 신성빌딩 4층</p>
+        <p>Design: 백호의 발톱</p>
+    </footer>
+  </div>
+  <script>
+    const validUsername = "조수아";
+    const validPassword = "1234";
+
+   
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault(); 
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      if (username === validUsername && password === validPassword) {
+        alert("로그인 성공!");
+        window.location.href = "dashboard.html"; 
+      } else {
+        const errorMessage = document.getElementById("errorMessage");
+        errorMessage.style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>

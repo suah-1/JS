@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시험 결과</title>
+</head>
+<body>
+
+    <h1>시험 결과</h1>
+
+    <h2>✅ 정답 리스트</h2>
+    <ul id="correct-list"></ul>
+
+    <h2>❌ 오답 리스트</h2>
+    <ul id="incorrect-list"></ul>
+
+    <button onclick="retryExam()">다시 시험 보기</button>
+
+    <script>
+        // 저장된 결과 데이터 가져오기
+        const results = JSON.parse(localStorage.getItem("examResults")) || [];
+
+        const correctList = document.getElementById("correct-list");
+        const incorrectList = document.getElementById("incorrect-list");
+
+        results.forEach(result => {
+            const listItem = document.createElement("li");
+            listItem.innerHTML = `
+                <strong>${result.question}</strong> <br>
+                <span>✅ 정답: ${result.correctAnswer}</span> <br>
+                <span>📝 내 답: ${result.selectedAnswer}</span>
+            `;
+
+            if (result.isCorrect) {
+                correctList.appendChild(listItem);
+            } else {
+                incorrectList.appendChild(listItem);
+            }
+        });
+
+        // 다시 시험 보기 버튼 클릭 시 index.html로 이동
+        function retryExam() {
+            localStorage.removeItem("examResults"); // 이전 결과 삭제
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+</html>

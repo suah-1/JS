@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 / 회원가입</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container input, .container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .container button {
+            background-color: deeppink;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: pink;
+        }
+        .link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .signup-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 로그인 폼 -->
+        <div id="login-form">
+            <h2>로그인</h2>
+            <input type="text" id="userId" placeholder="아이디" required>
+            <input type="password" id="loginPassword" placeholder="비밀번호" required>
+            <button onclick="memberLogin()">회원 로그인</button>
+            <p class="link">회원가입이 없으신가요? <button onclick="showSignupForm()">회원가입</button></p>
+        </div>
+
+        <!-- 회원가입 폼 -->
+        <div id="signup-form" class="signup-container">
+            <h2>회원가입</h2>
+            <input type="text" id="signupUsername" placeholder="사용자 이름" required>
+            <input type="text" id="signupUserId" placeholder="아이디" required>
+            <input type="password" id="signupPassword" placeholder="비밀번호" required>
+            <button onclick="signUp()">회원가입</button>
+            <p class="link">이미 계정이 있으신가요? <button onclick="showLoginForm()">로그인</button></p>
+        </div>
+
+        <!-- 비회원 로그인 -->
+        <button onclick="guestLogin()">비회원 로그인</button>
+    </div>
+
+    <script>
+        // 로그인 폼을 보이게 하기
+        function showLoginForm() {
+            document.getElementById("signup-form").style.display = "none";
+            document.getElementById("login-form").style.display = "block";
+        }
+
+        // 회원가입 폼을 보이게 하기
+        function showSignupForm() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("signup-form").style.display = "block";
+        }
+
+        // 회원 로그인
+        function memberLogin() {
+            const userId = document.getElementById("userId").value;
+            const password = document.getElementById("loginPassword").value;
+
+            // 기존 저장된 사용자 목록 가져오기
+            let users = JSON.parse(e.getItem("users")) || [];
+
+            // 아이디와 비밀번호 확인
+            const user = users.find(u => u.userId === userId && u.password === password);
+
+            if (user) {
+                alert(`${userId}님, 로그인 되었습니다.`);
+                window.location.href = "exam.html"; // 로그인 후 시험 페이지로 이동
+            } else {
+                alert("아이디 또는 비밀번호가 잘못되었습니다.");
+            }
+        }
+
+        // 비회원 로그인
+        function guestLogin() {
+            const guestName = "비회원";
+            alert("비회원으로 로그인 되었습니다.");
+            window.location.href = "exam2.html"; // 시험 페이지로 이동
+        }
+
+        // 회원가입 처리
+        function signUp() {
+            const username = document.getElementById("signupUsername").value;
+            const userId = document.getElementById("signupUserId").value;
+            const password = document.getElementById("signupPassword").value;
+
+            if (username && userId && password) {
+                // 기존 저장된 사용자 목록 가져오기
+                let users = JSON.parse(localStorage.getItem("users")) || [];
+
+                // 새 사용자 정보 추가
+                const newUser = {
+                    username: username,
+                    userId: userId,
+                    password: password
+                };
+
+                // 사용자 목록에 추가
+                users.push(newUser);
+
+                // 업데이트된 사용자 목록을 localStorage에 저장
+                
+                alert(`${username}님, 회원가입이 완료되었습니다.`);
+                showLoginForm(); // 회원가입 후 로그인 화면으로 돌아가기
+            } else {
+                alert("모든 정보를 입력해주세요.");
+            }
+        }
+    </script>
+</body>
+</html>

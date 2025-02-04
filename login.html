@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시험</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container input, .container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .container button {
+            background-color: deeppink;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>로그인</h2>
+        <input type="text" id="userId" placeholder="아이디" required>
+        <input type="password" id="loginPassword" placeholder="비밀번호" required>
+        <button onclick="memberLogin()">회원 로그인</button>
+        <p><a href="signup.html">회원가입</a></p>
+    </div>
+
+    <script>
+        function memberLogin() {
+            const userId = document.getElementById("userId").value;
+            const password = document.getElementById("loginPassword").value;
+            const storedUserId = localStorage.getItem("userId");
+            const storedPassword = localStorage.getItem("userPassword");
+
+            // 회원가입된 사용자만 로그인 가능
+            if (userId && password) {
+                if (storedUserId === userId && storedPassword === password) {
+                    alert(`${userId}님, 로그인 되었습니다.`);
+                    window.location.href = "exam.html"; // 로그인 후 시험 페이지로 이동
+                } else {
+                    alert("아이디 또는 비밀번호가 잘못되었습니다.");
+                }
+            } else {
+                alert("아이디와 비밀번호를 입력해주세요.");
+            }
+        }
+    </script>
+</body>
+</html>

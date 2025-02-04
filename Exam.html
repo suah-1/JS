@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 20px 20px 20px 50px;
             background-color: #FFF1FA;
             display: flex;
         }
@@ -15,7 +15,9 @@
             flex: 1;
             margin-right: 320px; /* OMR 패널 크기만큼 여백 */
         }
+        /* 각 문제 박스 */
         .question {
+            width: 850px;
             margin-bottom: 20px;
             padding: 10px;
             background-color: #ffffff;
@@ -26,17 +28,29 @@
             display: block;
             margin-bottom: 5px;
         }
+
+         /* 제출하기 버튼 */
+        .submit {
+            position: fixed;
+            top: 635px;
+            right: 20px;
+            width: 300px;
+            height: 6vh;
+            border-radius: 5px;
+            padding: 10px;
+
+        }
         .submit-btn {
-            margin-top: 20px;
+            width: 290px;
             padding: 10px 20px;
-            background-color: #4CAF50;
+            background-color: deeppink;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
         .submit-btn:hover {
-            background-color: #45a049;
+            background-color: pink;
         }
 
         /* ✅ OMR 고정 스타일 */
@@ -45,7 +59,7 @@
             top: 20px;
             right: 20px;
             width: 300px;
-            height: 90vh;
+            height: 85vh;
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -89,21 +103,42 @@
             background-color: deeppink;
             color: white;
         }
+
+        /* 타이머 스타일 */
+        .timer {
+            position: fixed;
+            top: 10px;
+            left: 20px;
+            font-size: 30px;
+            color: deeppink;
+        }
+        .unanswered {
+            background-color: yellow;
+        }
     </style>
 </head>
 <body>
     <div class="exam-section">
-        <h1>2025년도 제 1회 정보처리기사 문제</h1>
+        <h1>2025년도 제 1회 정보처리기사 문제</h1> 
         <div id="exam-container">Loading...</div>
-        <button class="submit-btn" onclick="submitAnswers()">제출하기</button>
     </div>
     <div class="omr-section">
         <h2 style="text-align: center; font-size: 35px;">답 안 지</h2>
         <div id="omr-container" class="omr-sheet"></div>
     </div>
+    <div class="submit">
+        <button class="submit-btn" onclick="submitAnswers()">제출하기</button>
+    </div>
+    <div class="exam-container">
+        <h2>시험시작</h2>
+        <p id=""greeting></p>
+        <p id="subject"></p>
+        <button onelick="retryExam()">시험 다시보기</button>
+    </div>
 
     <script>
         let questions = [];
+        let timerDuration = 30 * 60; // 30minutes
 
         async function loadQuestions() {
             try {
@@ -179,7 +214,6 @@
                 questionElement.scrollIntoView({ behavior: "smooth", block: "center" });
             }
         }
-
         function submitAnswers() {
             const results = questions.map(q => {
                 const selected = document.querySelector(`input[name="question-${q.id}"]:checked`);
@@ -191,8 +225,6 @@
                     isCorrect: selected ? parseInt(selected.value) === q.correct-1 : false
                 };
             });
-
-            localStorage.setItem("examResults", JSON.stringify(results));
             window.location.href = "result.html";
         }
 

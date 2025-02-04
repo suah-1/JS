@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>데이터 저장</title>
+</head>
+<body>
+    <h1>시험 시작</h1>
+    <p>사용자 이름을 입력하고 시험을 시작하세요.</p>
+    <input type="text" id="username" placeholder="이름 입력">
+    <button onclick="saveData()">시험 시작</button>
+
+    <script>
+        function saveData() {
+            // 입력값 가져오기
+            const username = document.getElementById("username").value.trim();
+
+            // 입력값 확인
+            if (!username) {
+                alert("이름을 입력하세요!");
+                return;
+            }
+
+            // 이름 저장
+            localStorage.setItem("username", username);
+
+            // 시험 문제 저장 (샘플 문제 데이터)
+            const questions = [
+                { id: 1, question: "HTML은 무엇의 약자입니까?", options: ["Hypertext Markup Language", "Hypertext Machine Language"], correct: 0 },
+                { id: 2, question: "CSS는 무엇입니까?", options: ["Cascading Style Sheets", "Creative Style Scripts"], correct: 0 }
+            ];
+            localStorage.setItem("questions", JSON.stringify(questions)); // 객체를 문자열로 저장
+
+            // 다음 페이지로 이동
+            window.location.href = "exam.html";
+        }
+    </script>
+</body>
+</html>

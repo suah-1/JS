@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .signup-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .signup-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .signup-container input, .signup-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .signup-container button {
+            background-color: deeppink;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .signup-container button:hover {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>회원가입</h2>
+
+        <input type="text" id="signupUsername" placeholder="사용자 이름" required>
+        <input type="email" id="signupEmail" placeholder="이메일" required>
+        <input type="password" id="signupPassword" placeholder="비밀번호" required>
+        
+        <button onclick="signUp()">회원가입</button>
+        
+        <p style="text-align: center;">이미 계정이 있으신가요? <a href="name.html">로그인</a></p>
+    </div>
+
+    <script>
+        function signUp() {
+            const username = document.getElementById("signupUsername").value;
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+
+            if (username && email && password) {
+                // 여기에서 실제로 서버에 회원가입 정보를 보낼 수 있습니다.
+                localStorage.setItem("userName", username);
+                alert(`${username}님, 회원가입이 완료되었습니다.`);
+                window.location.href = "name.html"; // 로그인 페이지로 이동
+            } else {
+                alert("모든 정보를 입력해주세요.");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -87,6 +87,7 @@
             unansweredCount.innerText = unanswered > 0 ? `안 푼 문제 : ${unanswered}` : "안 푼 문제 없음";
         }
 
+
         // json 파일 불러오기
         let questions = [];
 
@@ -199,8 +200,8 @@
             const totalScore = correctAnswers * 2;
 
             // 결과 저장
-            sessionStorage.setItem("examResults", JSON.stringify(results));
-            sessionStorage.setItem("examScore", totalScore); // 점수 저장
+            localStorage.setItem("examResults", JSON.stringify(results));
+            localStorage.setItem("examScore", totalScore); // 점수 저장
 
             if (confirm("정말 제출하시겠습니까?")) {
                 console.log("제출되었습니다.");

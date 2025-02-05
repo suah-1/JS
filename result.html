@@ -4,22 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>시험 결과</title>
+    <link rel="stylesheet" href="result.css">
 </head>
 <body>
-
-    <h1>시험 결과</h1>
-
-    <h2>✅ 정답 리스트</h2>
-    <ul id="correct-list"></ul>
-
-    <h2>❌ 오답 리스트</h2>
-    <ul id="incorrect-list"></ul>
-
-    <button onclick="retryExam()">다시 시험 보기</button>
+    <div class="container">
+        <h1>시험 결과</h1>
+        <div class="correctanswer">
+            <h2>✅ 정답 리스트</h2>
+            <ul id="correct-list"></ul>
+        </div>
+        <div class="wronganswer">
+            <h2>❌ 오답 리스트</h2>
+            <ul id="incorrect-list"></ul>
+        </div>
+        <button onclick="retryExam()">다시 시험 보기</button>
+    </div>
 
     <script>
         // 저장된 결과 데이터 가져오기
-        const results = JSON.parse(localStorage.getItem("examResults")) || [];
+        const results = JSON.parse(sessionStorage.getItem("examResults")) || [];
 
         const correctList = document.getElementById("correct-list");
         const incorrectList = document.getElementById("incorrect-list");
@@ -27,9 +30,12 @@
         results.forEach(result => {
             const listItem = document.createElement("li");
             listItem.innerHTML = `
-                <strong>${result.question}</strong> <br>
-                <span>✅ 정답: ${result.correctAnswer}</span> <br>
-                <span>📝 내 답: ${result.selectedAnswer}</span>
+                <div class="pl">
+                    <strong>${result.question}</strong> <br>
+                    <span>✅ 정답: ${result.correctAnswer}</span> <br>
+                    <span>📝 내 답: ${result.selectedAnswer}</span>    
+                </div>
+                
             `;
 
             if (result.isCorrect) {
@@ -41,10 +47,9 @@
 
         // 다시 시험 보기 버튼 클릭 시 index.html로 이동
         function retryExam() {
-            console.log("모든 데이터 초기화");
-            
-            window.location.href ="logins.html";
-                    }
+            sessionStorage.removeItem("examResults"); // 이전 결과 삭제
+            window.location.href = "select.html";
+        }
     </script>
 
 </body>

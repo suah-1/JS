@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</head>
+<style>
+    body {
+        justify-items: center;
+        background-color: #FFF1FA;
+    }
+
+    .passContainer {
+        text-align: center;
+        margin-top: 9%;
+    }
+
+    .passContainer .passimg img {
+        width: 400px;
+
+    }
+
+    .passtext p {
+        font-size: 20px;
+    }
+
+    .btnContainer {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+
+    }
+
+    .btnContainer button {
+        width: 150px;
+        padding: 10px 20px;
+        font-size: 20px;
+        color: white;
+        background-color: deeppink;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btnContainer button:hover {
+        background-color: pink;
+    }
+
+    .movement {
+        width: 100%;
+        margin-top: -15%;
+        position: relative;
+    }
+
+    .movement .good1 {
+        width: 30%;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-38%);
+    }
+
+    .movement .good2 {
+        width: 30%;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-38%);
+    }
+</style>
+
+<body>
+    <div class="passContainer">
+        <div class="passimg" data-aos="zoom-out">
+            <img src="images/pass.png" alt="pass">
+        </div>
+        <div class="passtext">
+            <p id="score-display"></p>
+            <p id="resultText"></p>
+            <p>합격을 축하드립니다 ♡</p>
+        </div>
+        <div class="btnContainer">
+            <button class="submit-btn" onclick="gotoExam()">풀이보기</button>
+            <button class="submit-btn" onclick="retryMain()">다시풀기</button>
+        </div>
+    </div>
+    <div class="movement">
+        <img class="good1" src="images/good4.gif" alt="good">
+        <img class="good2" src="images/good4.gif" alt="good">
+    </div>
+    <script>
+        AOS.init();
+
+        // 저장된 점수 불러오기
+        const totalScore = localStorage.getItem("examScore");
+        const userName = localStorage.getItem("userName") || "이름없음";
+
+        document.getElementById("score-display").innerText , 
+        document.getElementById("resultText").textContent = `${userName}님의 점수는 ${totalScore}점 입니다.`;
+
+        function gotoExam() {
+            window.location.href = "result.html";
+        }
+
+        function retryMain() {
+            window.location.href = "select.html";
+
+        }
+    </script>
+</body>
+
+</html>

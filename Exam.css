@@ -1,0 +1,198 @@
+body {
+    /* width: 100%; */
+    font-family: Arial, sans-serif;
+    margin: 2vh 2vw 2vh 3vw;
+    /* 상대 단위 적용 */
+    background-color: #FFF1FA;
+    display: flex;
+}
+
+/* 문제 섹션 */
+.exam-section {
+    flex: 1;
+    margin-right: 20vw;
+    /* OMR 패널 크기만큼 여백 */
+}
+
+/* 문제 박스 */
+.question {
+    width: 60vw;
+    /* 가로 너비를 % 또는 vw로 조정 */
+    margin-bottom: 2vh;
+    padding: 2vh;
+    background-color: #ffffff;
+    border: 0.1vw solid #ddd;
+    border-radius: 0.5vw;
+}
+
+.options label {
+    display: block;
+    margin-bottom: 0.5vh;
+}
+
+/* 제출하기 버튼 */
+.submit {
+    position: fixed;
+    bottom: 5vh;
+    right: 2vw;
+    width: 18vw;
+    /* 화면 크기에 따라 조정 */
+    height: 6vh;
+    border-radius: 0.5vw;
+    padding: 1vh;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1vh;
+    background-color: deeppink;
+    color: white;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: pink;
+}
+
+/* OMR 답안지 컨테이너 */
+.omr-section {
+    position: fixed;
+    top: 2vh;
+    right: 2vw;
+    width: 18vw;
+    height: 85vh;
+    background-color: #fff;
+    border: 0.15vw solid #ddd;
+    border-radius: 0.5vw;
+    padding: 1.5vh;
+    overflow-y: auto;
+    box-shadow: 0.2vw 0.2vw 1vw rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* OMR 헤더 */
+.fixed-header {
+    margin: 2px 0px 20px 0px;
+    position: sticky;
+    top: -10px;
+    background: white;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+    z-index: 10;
+}
+
+.omr-sheet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.omr-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.omr-question {
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+    color: deeppink;
+}
+
+.omr-question:hover {
+    text-decoration: underline;
+}
+
+.omr-option {
+    margin: 0 5px;
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 2px solid deeppink;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bold;
+}
+
+.selected {
+    background-color: deeppink;
+    color: white;
+}
+
+/* 제출하기 버튼 */
+.submit {
+    position: fixed;
+    bottom: 0px;
+    right: 20px;
+    width: 300px;
+    height: 6vh;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1vh;
+    background-color: deeppink;
+    color: white;
+    border: none;
+    border-radius: 0.5vw;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: pink;
+}
+
+/* 반응형 추가 */
+@media screen and (max-width: 1024px) {
+    .omr-section {
+        width: 22vw;
+    }
+
+    .omr-option {
+        width: 3vw;
+        height: 3vw;
+        line-height: 3vw;
+        font-size: 0.9rem;
+    }
+
+    .submit {
+        width: 20vw;
+    }
+}
+
+/* 타이머 추가 */
+.timer {
+    position: fixed;
+    top: 2%;
+    left: 72%;
+    transform: translateX(-50%);
+    font-size: 15px;
+    font-weight: bold;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #E3E3E3;
+}
+
+/* 안푼문제 추가 */
+.unanswered-box {
+    width: 111px;
+    top: 10%;
+    left: 67%;
+    position: fixed;
+    font-size: 15px;
+    font-weight: bold;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #E3E3E3;
+    text-align: center;
+}

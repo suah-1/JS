@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시험 결과</title>
+    <link rel="stylesheet" href="css/result.css">
+    <style>
+        /* 로그인 버튼 스타일 */
+        .loginbutton {
+            font-size: 24px; /* 글자 크기 */
+            padding: 20px 40px; /* 버튼 안의 여백을 더 크게 설정 */
+            background-color: deeppink; /* 버튼 배경색 */
+            color: white; /* 글자 색 */
+            border: none; /* 테두리 제거 */
+            border-radius: 8px; /* 둥근 모서리 */
+            cursor: pointer; /* 마우스 커서 모양 */
+            width: 250px; /* 버튼 너비 */
+            margin-bottom: 20px; /* 버튼 아래 여백 */
+            transition: background-color 0.3s ease; /* 배경색 변화에 부드러운 효과 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+        }
+
+        .loginbutton:hover {
+            background-color: deeppink; /* 호버 시 배경색 변화 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="user사용자-name">사용자님</h1>
+        <P>각 문제를 클릭하여 풀이를 확인할 수 있습니다.</P>
+        <button class="loginbutton" onclick="login()" style="margin-bottom: 20px;">
+            로그인하기
+        </button>
+
+        <!-- 정답 리스트 -->
+        <h2>✅ 정답 리스트</h2>
+        <div id="correct-list"></div>
+
+        <!-- 오답 리스트 -->
+        <h2>❌ 오답 리스트</h2>
+        <div id="incorrect-list"></div>
+
+        <button class="retrybutton" onclick="retryExam()" style="margin-top: 20px;">다시 시험 보기</button>
+
+        <button class="homebutton" onclick="home()"><svg xmlns="http://www.w3.org/2000/svg" height="50px"
+            viewBox="0 -960 960 960" width="50px" fill="#5f6368">
+            <path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z" />
+        </svg></button>
+    </div>
+
+    <script>
+        function home() {
+            window.location.href = "home.html";
+        }
+         // 로그인 버튼 클릭 시 name.html로 이동
+         function login() {
+            window.location.href = "name.html";
+        }
+
+        // 저장된 결과 데이터 가져오기
+        const results = JSON.parse(localStorage.getItem("examResults") || "[]");
+
+        const correctList = document.getElementById("correct-list");
+        const incorrectList = document.getElementById("incorrect-list");
+
+        if (results.length === 0) {
+            correctList.innerHTML = "<p>정답이 없습니다.</p>";
+            incorrectList.innerHTML = "<p>오답이 없습니다.</p>";
+        }
+
+        results.forEach((result, index) => {
+            const listItem = document.createElement("div");
+            listItem.className = "question-item";
+
+            // solution이 undefined일 경우 대비
+            const solutionText = result.solution ? result.solution : "풀이 정보가 없습니다.";
+
+            listItem.innerHTML = `
+                <strong>${index + 1}. ${result.question}</strong>
+                <p>✅ 정답: ${result.correctAnswer}</p>
+                <p>📝 내 답: ${result.selectedAnswer}</p>
+                <div class="solution" id="solution-${index}">
+                    <p>💡 풀이: ${solutionText}</p>
+                </div>
+            `;
+
+            listItem.addEventListener("click", () => toggleSolution(index, listItem));
+
+            if (result.isCorrect) {
+                correctList.appendChild(listItem);
+            } else {
+                incorrectList.appendChild(listItem);
+            }
+        });
+
+        // 풀이 아코디언 기능
+        function toggleSolution(index, element) {
+            const solutionDiv = document.getElementById(`solution-${index}`);
+            const isVisible = solutionDiv.style.display === "block";
+
+            // 모든 풀이 닫기
+            document.querySelectorAll(".solution").forEach(div => div.style.display = "none");
+            document.querySelectorAll(".question-item").forEach(item => item.classList.remove("active"));
+
+            // 클릭한 문제의 풀이만 열기/닫기
+            if (!isVisible) {
+                solutionDiv.style.display = "block";
+                element.classList.add("active");
+            }
+        }
+
+        // 다시 시험 보기 버튼 클릭 시 select.html로 이동
+        function retryExam() {
+            localStorage.removeItem("examResults"); // 이전 결과 삭제
+            window.location.href = "select.html";
+        }
+    </script>
+</body>
+
+</html>

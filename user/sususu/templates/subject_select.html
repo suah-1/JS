@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>과목 선택</title>
+    <link rel="stylesheet" href="css/select.css">
+</head>
+
+<body>
+    <div class="home-button2">
+        <button class="homebutton2" onclick="home()"><svg xmlns="http://www.w3.org/2000/svg" height="50px"
+                viewBox="0 -960 960 960" width="50px" fill="#5f6368">
+                <path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z" />
+            </svg></button>
+    </div>
+
+    <div class="container">
+        <h2>과목을 선택하세요</h2>
+        <select id="subjectSelect">
+            <option value="">과목을 선택하세요</option>
+            <option id="engineer1" value="정보처리기사">정보처리기사</option>
+            <option id="engineer2" value="정보처리산업기사">정보처리산업기사</option>
+            <option id="engineer3" value="정보처리기능사">정보처리기능사</option>
+        </select>
+        <button class="start-btn" onclick="goToYearPage()">선택 완료</button>
+    </div>
+
+    <script>
+        function home() {
+            window.location.href = "home.html";
+        }
+
+        function goToYearPage() {
+            const subject = document.getElementById("subjectSelect").value;
+            localStorage.setItem("selectedSubject", subject); // 과목 저장
+            window.location.href = "year_select.html"; // 연도 선택 페이지로 이동
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>백호의 발톱 CBT 응시생 합격자 명단</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #FFF1FA;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        .header {
+            width: 100%;
+            margin: 20px;
+        }
+
+        .header .header-text {
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .header .header-text h1 {
+            font-size: 40px;
+            margin: 10px;
+        }
+
+        .header .header-text p {
+            font-size: 17px;
+            margin: 5px;
+        }
+
+        .header .header-img {
+            width: 100%;
+            position: relative;
+        }
+
+        .header .header-img .winner1 {
+            width: 10%;
+            position: absolute;
+            left: 20%;
+            top: 50%;
+            transform: translateY(-100%);
+        }
+
+        .header .header-img .winner2 {
+            width: 10%;
+            position: absolute;
+            right: 20%;
+            top: 50%;
+            transform: translateY(-100%);
+        }
+
+        .main-container {
+            border: 2px solid white;
+            border-radius: 5px;
+            width: 750px;
+            height: 400px;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .img-container {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            width: 100%;
+            animation: scrollLoop 20s linear infinite;
+        }
+
+        @keyframes scrollLoop {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        .img-container img {
+            display: block;
+            width: 100%;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: none;
+            background-color: deeppink;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .button-container button:hover {
+            background-color: pink;
+        }
+
+        /* 로그인 창 스타일 */
+        .login-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #FFF;
+            border: 2px solid deeppink;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        .login-container input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-container button {
+            background-color: deeppink;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-container button:hover {
+            background-color: pink;
+        }
+
+        .login-container .message {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-text">
+            <h1>백호의 발톱 CBT</h1>
+            <p>2025 정보처리기사 응시생 합격자 명단</p>
+            <p>합격을 축하드립니다.</p>
+        </div>
+        <div class="header-img">
+            <img src="images/winner.png" alt="winner" class="winner1">
+            <img src="images/winner.png" alt="winner" class="winner2">
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="img-container">
+            <img src="images/name.png" alt="합격자 명단">
+            <img src="images/name.png" alt="합격자 명단">
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button onclick="showLogin()">로그인 하기</button>
+        <button onclick="nonmember()">비회원 이용</button>
+    </div>
+
+    <div class="login-container" id="loginContainer">
+        <h3>로그인</h3>
+        <input type="text" id="username" placeholder="아이디를 입력하세요">
+        <input type="password" id="password" placeholder="비밀번호를 입력하세요">
+        <button onclick="login()">로그인</button>
+        <button onclick="signup()">회원가입</button>
+        <div class="message" id="loginMessage"></div>
+    </div>
+
+    <script>
+        // 로그인 창 보이기
+        function showLogin() {
+            const loginContainer = document.getElementById('loginContainer');
+            loginContainer.style.display = 'flex';
+        }
+        //로그인 하기
+        function login() {
+        window.location.href = "name.html";
+        }
+        //회원가입
+        function signup() {
+        window.location.href = "name1.html";
+    }
+
+        // 비회원 이용
+        function nonmember() {
+            window.location.href = "name.html";
+        }
+
+        // 로그인 함수
+         function register() {
+            const userId = document.getElementById("userIdInput").value.trim();
+            const password = document.getElementById("passwordInput").value.trim();
+
+            if (!userId || !password) {
+            alert("모든 정보를 입력해주세요!");
+            return;
+        }
+
+        let existingUsers = localStorage.getItem("users");
+        existingUsers = existingUsers ? JSON.parse(existingUsers) : [];
+
+        if (existingUsers.some(user => user.userId === userId)) {
+            alert("이미 존재하는 아이디입니다. 다른 아이디를 사용해주세요.");
+            return;
+        }
+
+        const userData = { userId, password };
+        existingUsers.push(userData);
+        localStorage.setItem("users", JSON.stringify(existingUsers));
+
+        alert("회원가입이 완료되었습니다!");
+        window.location.href = "home.html";
+    }
+
+         
+    </script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+        body {
+            text-align: center;
+            margin-top: 9%;
+            background-color: #FFF1FA;
+        }
+
+        .imgst {
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .failContainer {
+            text-align: center;
+            margin-top: 9%;
+        }
+
+        .failbtn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .failtext p {
+            font-size: 20px;
+        }
+
+        .btn {
+            width: 150px;
+            padding: 10px 20px;
+            font-size: 20px;
+            color: white;
+            background-color: deeppink;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: pink;
+        }
+        .movement {
+            width: 100%;
+            margin-top: -15%;
+            position: relative;
+        }
+
+        .movement .bad1 {
+            width: 30%;
+            height: auto;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-27%);
+        }
+
+        .movement .bad2 {
+            width: 30%;
+            height: auto;
+            position: absolute;
+            right: 0px;
+            top: 50%;
+            transform: translateY(-27%);
+        }
+        .failtext{
+            font-size: 16px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="failContainer">
+        <div class="imgst" data-aos="zoom-in-up">
+            <img src="images/fail.png" alt="실패">
+        </div>
+        <div class="failtext">
+            <p id="score-display"></p>
+            <p id="resultText"></p>
+            <p>다시 시도하세요. (합격 기준: 60점)</p>
+        </div>
+        <div class="failbtnContainer">
+            <button class="btn" onclick="gotoExam()">풀이보기</button>
+            <button class="btn" onclick="retryMain()">다시풀기</button>
+        </div>
+    </div>
+    <div class="movement">
+        <img class="bad1" src="images/bad.gif" alt="절망">
+        <img class="bad2" src="images/bad.gif" alt="절망">
+    </div>
+    <script>
+        AOS.init();
+
+        const totalScore = localStorage.getItem("examScore");
+        const userName = localStorage.getItem("userName") || "이름없음";
+
+        document.getElementById("score-display").innerText , 
+        document.getElementById("resultText").textContent = `${userName}님의 점수는 ${totalScore}점으로 불합격입니다.`;
+
+
+
+
+        function gotoExam() {
+            window.location.href = "result.html";
+        }
+
+        function retryMain() {
+            window.location.href = "subject_select.html";
+        }
+    </script>
+</body>
+
+</html>

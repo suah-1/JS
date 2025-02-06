@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> HTML 문제 저장</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .form-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .choices {
+      margin-top: 10px;
+    }
+    .choices input {
+      margin-right: 10px;
+    }
+    .add-choice {
+      margin-top: 10px;
+      cursor: pointer;
+      color: #007BFF;
+      text-decoration: underline;
+      border: none;
+      background: none;
+      padding: 0;
+    }
+    .add-choice:hover {
+      text-decoration: none;
+    }
+    .submit-btn {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+    .error-message {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>문제 저장</h2>
+    <form id="form">
+      <div class="form-group">
+        <label for="문제">문제</label>
+        <div><input type="text" placeholder="" value="HTML의 기본 구조를 정의하는 태그는 무엇인가요?" readonly></div>
+      </div>
+      <div class="form-group">
+        <label>보기</label>
+        <div class="보기" id="보기">
+          <!-- Pre-filled 4 choices -->
+          <div><input type="text" placeholder="Choice 1" value="이거는 DB다" readonly></div>
+          <div><input type="text" placeholder="Choice 2" value="아니다 이거는 DB가 아니다" readonly></div>
+          <div><input type="text" placeholder="Choice 3" value="모르겠다" readonly></div>
+          <div><input type="text" placeholder="Choice 4" value="보류" readonly></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="correctAnswer">정답</label>
+        <div><input type="text" placeholder="Choice 4" value="보류" readonly></div>
+      </div>
+    </form>
+  </div>
+  <div class="form-container">
+    <h2>문제 저장</h2>
+    <form id="form">
+      <div class="form-group">
+        <label for="문제">문제</label>
+        <div><input type="text" placeholder="" value="HTML의 기본 구조를 정의하는 태그는 무엇인가요?" readonly></div>
+      </div>
+      <div class="form-group">
+        <label>보기</label>
+        <div class="보기" id="보기">
+            
+          <!-- Pre-filled 4 choices -->
+          <div><input type="text" placeholder="Choice 1" value="이거는 DB다" readonly></div>
+          <div><input type="text" placeholder="Choice 2" value="아니다 이거는 DB가 아니다" readonly></div>
+          <div><input type="text" placeholder="Choice 3" value="모르겠다" readonly></div>
+          <div><input type="text" placeholder="Choice 4" value="보류" readonly></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="correctAnswer">정답</label>
+        <div><input type="text" placeholder="Choice 4" value="보류" readonly></div>
+      </div>
+      <button type="button" class="submit-btn" onclick="saveQuestion()">문제 저장</button>
+    </form>
+  </div>
+
+  <script>
+    function saveQuestion() {
+      // Define the question and options inside the function
+      const question = "HTML의 기본 구조를 정의하는 태그는 무엇인가요?";
+      const options = [
+        "이거는 DB다",
+        "아니다 이거는 DB가 아니다",
+        "모르겠다",
+        "보류"
+      ];
+      
+      // Create the quizData object
+      const quizData = {
+        question: question,
+        options: options
+      };
+      
+      // Create the Blob and trigger the download
+      const blob = new Blob([JSON.stringify(quizData, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "quizData.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      alert("json파일이 저장되었습니다.");
+    }
+  </script>
+</body>
+</html>

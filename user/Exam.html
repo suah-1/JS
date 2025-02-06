@@ -5,25 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Application</title>
-    <link rel="stylesheet" href="Exam.css">
+    <link rel="stylesheet" href="css/Exam.css">
 </head>
 
 <body>
-    <!-- 시험 문제 -->
+    <!-- 시험 문제제 -->
     <div class="exam-section">
         <h1 id="examTitle"></h1>
         <div id="exam-container">Loading...</div>
     </div>
-    <!-- omr 답안지 -->
+    <!-- omr 답안지지 -->
     <div class="omr-section">
         <h2 class="fixed-header" style="text-align: center; font-size: 35px;">답 안 지</h2>
         <div id="omr-container" class="omr-sheet"></div>
     </div>
-    <!-- 제출하기 버튼 -->
+    <!-- 제출하기 버튼튼 -->
     <div class="submit">
         <button class="submit-btn" onclick="submitAnswers()">제출하기</button>
     </div>
-    <!-- 남은시간 타이머 -->
+    <!-- 남은시간 타이머머 -->
     <div class="timer" id="timer">
         남은 시간 : <span id="time-left">60:00</span>
     </div>
@@ -93,6 +93,8 @@
             unansweredCount.innerText = unanswered > 0 ? `안 푼 문제 : ${unanswered}` : "안 푼 문제 없음";
         }
 
+
+
         // 과목명을 JSON 파일명과 매핑
         const subjectMapping = {
             "정보처리기사": "questions",
@@ -100,8 +102,6 @@
             "정보처리기능사": "questions3"
         };
 
-
-        // json 파일 불러오기
         let questions = [];
 
         async function loadQuestions() {
@@ -154,6 +154,7 @@
                 document.getElementById("exam-container").innerHTML = "문제를 불러오는 데 실패했습니다.";
             }
         }
+
 
         // 시험문제 출력
         function renderQuestions() {

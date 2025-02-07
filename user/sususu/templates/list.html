@@ -3,148 +3,314 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> HTML 문제 저장</title>
+  <title>문제풀기</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
+      background-color: #FFF1FA;
+    }
+    .container {
+      max-width: 800  px;
+      margin: 0 auto;
     }
     .form-container {
-      max-width: 600px;
+      max-width: 100%;
       margin: 0 auto;
       padding: 20px;
       border: 1px solid #ccc;
-      border-radius: 8px;
+      border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
     .form-group input[type="text"] {
-      width: 100%;
+      width: 90%;
       padding: 8px;
+      margin-bottom: 10px;
+      margin-right: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-    .choices {
-      margin-top: 10px;
+    .question-list {
+      margin-top: 20px;
     }
-    .choices input {
-      margin-right: 10px;
+    .question-item {
+      padding: 10px;
+      background-color: #FFF;
+      border: 1px solid deeppink;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      word-wrap: break-word; /* 긴 단어도 줄바꿈 */
+      word-break: break-word; /* 텍스트가 박스를 넘지 않도록 줄바꿈 */
     }
-    .add-choice {
-      margin-top: 10px;
-      cursor: pointer;
-      color: #007BFF;
-      text-decoration: underline;
-      border: none;
-      background: none;
-      padding: 0;
+    .form-group {
+      margin-bottom: 10px;
     }
-    .add-choice:hover {
-      text-decoration: none;
-    }
-    .submit-btn {
-      padding: 10px 20px;
-      background-color: #007BFF;
+    .btn {
+      padding: 10px 15px;
+      background-color: deeppink;
       color: white;
       border: none;
-      border-radius: 4px;
+      border-radius: 5px;
       cursor: pointer;
     }
-    .submit-btn:hover {
-      background-color: #0056b3;
-    }
-    .error-message {
-      color: red;
-      font-size: 0.9em;
-      margin-top: 5px;
+    .btn:hover {
+      background-color: deeppink;
     }
   </style>
 </head>
 <body>
   <div class="form-container">
-    <h2>문제 저장</h2>
+    <h2></h2>
     <form id="form">
       <div class="form-group">
         <label for="문제">문제</label>
-        <div><input type="text" placeholder="" value="HTML의 기본 구조를 정의하는 태그는 무엇인가요?" readonly></div>
+        <div><input type="text" placeholder="" ></div>
       </div>
       <div class="form-group">
         <label>보기</label>
         <div class="보기" id="보기">
-          <!-- Pre-filled 4 choices -->
-          <div><input type="text" placeholder="Choice 1" value="이거는 DB다" readonly></div>
-          <div><input type="text" placeholder="Choice 2" value="아니다 이거는 DB가 아니다" readonly></div>
-          <div><input type="text" placeholder="Choice 3" value="모르겠다" readonly></div>
-          <div><input type="text" placeholder="Choice 4" value="보류" readonly></div>
+        <!-- 4개의 텍스트만 사용 -->
+          <div><input type="text" placeholder="" ></div>
+          <div><input type="text" placeholder="" ></div>
+          <div><input type="text" placeholder="" ></div>
+          <div><input type="text" placeholder="" ></div>
         </div>
       </div>
       <div class="form-group">
         <label for="correctAnswer">정답</label>
-        <div><input type="text" placeholder="Choice 4" value="보류" readonly></div>
+        <div><input type="text" placeholder="" readonly></div>
+      </div>
+      <div class="form-group">
+        <label for="correctAnswer">풀이</label>
+        <div><input type="text" placeholder="" readonly></div>
       </div>
     </form>
   </div>
-  <div class="form-container">
-    <h2>문제 저장</h2>
-    <form id="form">
-      <div class="form-group">
-        <label for="문제">문제</label>
-        <div><input type="text" placeholder="" value="HTML의 기본 구조를 정의하는 태그는 무엇인가요?" readonly></div>
-      </div>
-      <div class="form-group">
-        <label>보기</label>
-        <div class="보기" id="보기">
-            
-          <!-- Pre-filled 4 choices -->
-          <div><input type="text" placeholder="Choice 1" value="이거는 DB다" readonly></div>
-          <div><input type="text" placeholder="Choice 2" value="아니다 이거는 DB가 아니다" readonly></div>
-          <div><input type="text" placeholder="Choice 3" value="모르겠다" readonly></div>
-          <div><input type="text" placeholder="Choice 4" value="보류" readonly></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="correctAnswer">정답</label>
-        <div><input type="text" placeholder="Choice 4" value="보류" readonly></div>
-      </div>
-      <button type="button" class="submit-btn" onclick="saveQuestion()">문제 저장</button>
-    </form>
+
+    <!-- 문제 목록 -->
+   
+    <button class="btn" id="add-question-btn">문제 추가</button>
+    <button type="button" class="btn" onclick="saveQuestions()">문제 저장</button>
+    <div id="question-list"></div>
   </div>
 
-  <script>
-    function saveQuestion() {
-      // Define the question and options inside the function
-      const question = "HTML의 기본 구조를 정의하는 태그는 무엇인가요?";
-      const options = [
-        "이거는 DB다",
-        "아니다 이거는 DB가 아니다",
-        "모르겠다",
-        "보류"
-      ];
-      
-      // Create the quizData object
-      const quizData = {
-        question: question,
-        options: options
-      };
-      
-      // Create the Blob and trigger the download
-      const blob = new Blob([JSON.stringify(quizData, null, 2)], { type: "application/json" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "quizData.json";
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+<script>
+  
+  const questions = [  
+    {
+        id:1,
+        question: "컨트롤러 미들웨어에 대한 설명으로 틀린 것은?",
+        options:[
+        "여러 운영체제에서 응용 프로그램들 사이에 위치한 소프트웨어이다.",
+        "미들웨어의 서비스 이용을 위해 사용자와 정보 교환 방법 등의 내부 동작을 쉽게 확인할 수 있어야 한다.",
+        "소프트웨어 컴포넌트를 연결하기 위한 준비된 인터프리터 구조를 제공한다.",
+        " 여러 컴포넌트를 1대1, 1대다, 다대다 등 여러 가지 형태로 연결이 가능하다."
+       ],
+        answer:"미들웨어의 서비스 이용을 위해 사용자와 정보 교환 방법 등의 내부 동작을 쉽게 확인할 수 있어야 한다.",
+       solution:'미들웨어는 운영체제와 응용 프로그램 간의 중간 역할을 하며, 내부 동작을 사용자에게 노출할 필요가 없습니다.'
+        
+    },
+    {
+        id: 2,
+        question: "UI의 설계 지침으로 틀린 것은?",
+        options: [
+            "이해하기 편하고 쉽게 사용할 수 있는 환경을 제공해야 한다.",
+            "주요 기능을 메인 화면에 노출하여 조작이 쉬워야 한다.",
+            "치명적인 오류에 대한 부정적인 사항은 사용자가 인지할 수 없도록 한다.",
+            "사용자의 직무, 연령, 성별 등 다양한 계층을 수용해야 한다."
+        ],
+        answer: "치명적인 오류에 대한 부정적인 사항은 사용자가 인지할 수 없도록 한다.",
+       solution: `치명적인 오류에 대한 부정적인 사항은 사용자가 인지할 수 없도록 한다는 잘못된 설명입니다.
+치명적인 오류는 반드시 사용자에게 인지되도록 해야 합니다.`
+    },
+    {
+        id: 3,
+        question: "익스트림 프로그래밍에 대한 설명으로 틀린 것은?",
+        options: [
+            "대표적인 구조적 방법론 중 하나이다.",
+            "소규모 개발 조직이 불확실하고 변경이 많은 요구를 접하였을 때 적절한 방법이다.",
+            "익스트림 프로그래밍을 구동시키는 원리는 상식적인 원리와 경험을 최대한 끌어 올리는 것이다.",
+            "구체적인 실천 방법을 정의하고 있으며, 개발 문서 보다는 소스코드에 중점을 둔다."
+        ],
+        answer: "대표적인 구조적 방법론 중 하나이다.",
+        solution:"익스트림 프로그래밍은 대표적인 구조적 방법론이 아니다. 익스트림 프로그래밍은 애자일 방법론 중 하나로, 개발자가 독립적으로 작업하는 것이 아니라 협업 중심으로 이루어집니다."
+    },
+    {
+        id: 4,
+        question: "유스케이스(Use Case)의 구성 요소 간의 관계에 포함되지 않는 것은?",
+        options: [
+            "연관",
+            "확장장",
+            "구체화",
+            "일반화"
+        ],
+        answer: "구체화",
+        solution:"구체화는 유스케이스의 관계에서 포함되지 않는 항목입니다. 유스케이스 간의 관계에는 연관, 확장장, 일반화가 포함됩니다."
+    },
+    {
+        id: 5,
+        question: "요구사항 분석에서 비기능적(Nonfunctional) 요구에 대한 설명으로 옳은 것은?",
+        options: [
+            "시스템의 처리량(Throughput), 반응 시간 등의 성능 요구나 품질 요구는 비기능적 요구에 해당하지 않는다.",
+            "'차량 대여 시스템이 제공하는 모든 화면이 3초 이내에 사용자에게 보여야 한다'는 비기능적 요구이다.",
+            "시스템 구축과 관련된 안전, 보안에 대한 요구사항들은 비기능적 요구에 해당하지 않는다.",
+            "'금융 시스템은 조회, 인출, 입금, 송금의 기능이 있어야 한다'는 비기능적 요구이다."
+        ],
+        answer: "차량 대여 시스템이 제공하는 모든 화면이 3초 이내에 사용자에게 보여야 한다'는 비기능적 요구이다",
+        solution:"차량 대여 시스템이 제공하는 모든 화면이 3초 이내에 사용자에게 보여야 한다'는 비기능적 요구가 맞습니다. 비기능적 요구는 성능, 보안, 신뢰성 등과 관련된 요구입니다."
+    },
+    {
+        id: 6,
+        question: "정보공학 방법론에서 데이터베이스 설계의 표현으로 사용하는 모델링 언어는?",
+        options: [
+            "Package Diagram",
+            "State Transition Diagram",
+            "Deployment Diagram",
+            "Entity-Relationship Diagram"
+        ],
+        answer: "Entity-Relationship Diagram" ,
+        solution:"정보공학 방법론에서 데이터베이스 설계는 **ERD(Entity Relationship Diagram)**로 표현됩니다."
+    },
 
-      alert("json파일이 저장되었습니다.");
+    {
+        id: 7,
+        question: "UI의 설계 지침으로 틀린 것은?",
+        options: [
+            "이해하기 편하고 쉽게 사용할 수 있는 환경을 제공해야 한다.",
+            "주요 기능을 메인 화면에 노출하여 조작이 쉽도록 하여야 한다.",
+            "치명적인 오류에 대한 부정적인 사항은 사용자가 인지할 수 없도록 한다.",
+            "사용자의 직무, 연령, 성별 등 다양한 계층을 수용하여야 한다."
+        ],
+        answer: "치명적인 오류에 대한 부정적인 사항은 사용자가 인지할 수 없도록 한다.",
+        solution:"UI 설계 지침에서 '사용자 불편을 초래하는 복잡한 인터페이스'는 잘못된 설명입니다."
+    },
+    {
+        id: 8,
+        question: "객체지향 개념에서 다형성(Polymorphism)과 관련한 설명으로 틀린 것은?",
+        options: [
+            "다형성은 현재 코드를 변경하지 않고 새로운 클래스를 쉽게 추가할 수 있게 한다.",
+            "다형성이란 여러 가지 형태를 가지고 있다는 의미로, 여러 형태를 받아들일 수 있는 특징을 말한다.",
+            "메소드 오버라이딩(Overriding)은 상위 클래스에서 정의한 일반 메소드의 구현을 하위 클래스에서 무시하고 재정의할 수 있다.",
+            "메소드 오버로딩(Overloading)의 경우 매개 변수 타입은 동일하지만 메소드명을 다르게 함으로써 구현, 구분할 수 있다."
+        ],
+       answer: "메소드 오버로딩(Overloading)의 경우 매개 변수 타입은 동일하지만 메소드명을 다르게 함으로써      구현, 구분할 수 있다.",
+        solution: "다형성은 같은 메서드명이지만 다른 동작을 하는 것, 즉 매개변수나 객체에 따라 다르게 동작하는 것이죠."
+    },
+    {
+        id: 9,
+        question: "객체에 대한 설명으로 틀린 것은?",
+        options: [
+            "객체는 상태, 동작, 고유 식별자를 가진 모든 것이라 할 수 있다.",
+            "객체는 공통 속성을 공유하는 클래스들의 집합이다.",
+            "객체는 필요한 자료 구조와 이에 수행되는 함수들을 가진 하나의 독립된 존재이다.",
+            "객체의 상태는 속성값에 의해 정의된다."
+        ],
+        answer: "객체는 공통 속성을 공유하는 클래스들의 집합이다.",
+       solution:"객체는 인스턴스화된 클래스의 실체로, 속성과 메서드로 구성됩니다."
+    },
+    {
+        id: 10,
+        question: "속성과 관련된 연산(Operation)을 클래스 안에 묶어서 하나로 취급하는 것을 의미하는 객체지향 개념은?",
+        options: [
+            "Inheritance",
+            "Class",
+            "Encapsulation",
+            "Association"
+        ],
+       answer: "Encapsulation",
+        solution:"캡슐화는 속성과 연산을 하나로 묶는 객체지향 개념입니다."
+    },
+    {
+        id: 11,
+        question: "애자일(Agile) 프로세스 모델에 대한 설명으로 틀린 것은?",
+        options: [
+            "변화에 대한 대응보다는 자세한 계획을 중심으로 소프트웨어를 개발한다.",
+            "프로세스와 도구 중심이 아닌 개개인과의 상호소통을 통해 의견을 수렴한다.",
+            "협상과 계약보다는 고객과의 협력을 중시한다.",
+            "문서 중심이 아닌, 실행 가능한 소프트웨어를 중시한다."
+        ],
+       answer: "변화에 대한 대응보다는 자세한 계획을 중심으로 소프트웨어를 개발한다.",
+       solution:"애자일은 짧은 개발 주기와 자주 변화하는 요구사항을 반영하는 방법론으로, 모든 프로젝트에 일률적으로 적용될 수 없다는 점이 틀린 설명입니다."
+    },
+    {
+        id: 12,
+        question: "명백한 역할을 가지고 독립적으로 존재할 수 있는 시스템의 부분으로 넓은 의미에서는 재사용되는 모든 단위라고 볼 수 있으며, 인터페이스를 통해서만 접근할 수 있는 것은?",
+        options: [
+            "Model",
+            "Sheet",
+            "Component",
+            "Cell"
+        ],
+        answer: "Component",
+        solution:"모듈은 독립적이고 인터페이스를 통해 접근하며 재사용 가능한 시스템의 부분입니다."
+    },
+      // 나머지 데이터 추가
+  ];
+
+  let currentIndex = 0; // 현재 추가된 문제의 인덱스
+
+  // 문제 추가 버튼 클릭 이벤트
+  document.getElementById("add-question-btn").addEventListener("click", () => {
+    const questionList = document.getElementById("question-list");
+    const maxQuestionsToAdd = 1; // 한 번에 추가할 문제 개수
+
+    for (let i = 0; i < maxQuestionsToAdd; i++) {
+      if (currentIndex >= questions.length) {
+        alert("모든 문제를 추가했습니다!");
+        break;
+      }
+
+      const q = questions[currentIndex];
+      const questionItem = document.createElement("div");
+      questionItem.className = "question-item";
+      questionItem.style.marginBottom = "20px";
+
+      questionItem.innerHTML = `
+        <strong>문제 ${currentIndex + 1}:</strong> ${q.question}<br>
+        <div style="margin-top: 15px;"></div>
+        <strong>보기:</strong><br>
+        ${q.options.map((opt, idx) => `${idx + 1}. ${opt}`).join("<br>")}<br>
+        <div style="margin-top: 15px;"></div>
+        <strong>정답:</strong> ${q.answer}<br>
+        <div style="margin-top: 15px;"></div>
+        <strong>해설:</strong> ${q.solution}
+      `;
+
+      questionList.appendChild(questionItem);
+      currentIndex++;
     }
+  });
+
+  // 문제 저장 버튼 기능
+  function saveQuestions() {
+    const questionItems = document.querySelectorAll(".question-item");
+    const savedQuestions = Array.from(questionItems).map((item) => {
+      const questionText = item.querySelector("strong").nextSibling.textContent.trim();
+      const optionsText = Array.from(item.querySelectorAll("br"))
+        .map((br) => br.previousSibling?.textContent?.trim())
+        .filter((option) => option && !option.includes("정답") && !option.includes("해설"));
+
+      const answerText = item.innerHTML.split("<strong>정답:</strong> ")[1]?.split("<br>")[0]?.trim();
+      const solutionText = item.innerHTML.split("<strong>해설:</strong> ")[1]?.trim();
+      return {
+        question: questionText,
+        options: optionsText,
+        answer: answerText,
+        solution: solutionText,
+      };
+    });
+
+    // JSON 파일 생성 및 다운로드
+    const blob = new Blob([JSON.stringify(savedQuestions, null, 2)], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "quizData.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    alert("문제가 JSON 파일로 저장되었습니다!");
+  }
   </script>
 </body>
 </html>

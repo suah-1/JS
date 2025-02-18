@@ -15,18 +15,14 @@
             margin: 20px;
             padding: 0;
         }
-
         .header {
             width: 100%;
             margin: 20px;
-
         }
 
         .header .header-text {
             text-align: center;
-            /* margin-bottom: 20px; */
             font-size: 12px;
-
         }
 
         .header .header-text h1 {
@@ -42,7 +38,6 @@
         .header .header-img {
             width: 100%;
             position: relative;
-
         }
 
         .header .header-img .winner1 {
@@ -60,7 +55,6 @@
             top: 50%;
             transform: translateY(-100%);
         }
-
         .main-container {
             border: 2px solid white;
             border-radius: 5px;
@@ -70,16 +64,13 @@
             position: relative;
             overflow: hidden;
         }
-
         .img-container {
             display: flex;
             flex-direction: column;
             position: absolute;
             width: 100%;
             animation: scrollLoop 20s linear infinite;
-
         }
-
         @keyframes scrollLoop {
             0% {
                 transform: translateY(0);
@@ -88,10 +79,7 @@
             100% {
                 transform: translateY(-50%);
             }
-
-            /* 절반만 이동 */
         }
-
 
         .img-container img {
             display: block;
@@ -116,6 +104,47 @@
         .button-container button:hover {
             background-color: pink;
         }
+
+        /* 로그인 창 스타일 */
+        .login-container {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #FFF;
+            border: 2px solid deeppink;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            margin-top: 20px;
+        }
+
+        .login-container input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .login-container button {
+            background-color: deeppink;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .login-container button:hover {
+            background-color: pink;
+        }
+
+        .login-container .message {
+            margin-top: 10px;
+            font-size: 14px;
+        }
     </style>
 </head>
 
@@ -130,26 +159,75 @@
             <img src="images/winner.png" alt="winner" class="winner1">
             <img src="images/winner.png" alt="winner" class="winner2">
         </div>
-
     </div>
 
     <div class="main-container">
         <div class="img-container">
-            <img src="images/name.png" alt="합격자 명단" id="movingImage">
-            <img src="images/name.png" alt="합격자 명단" id="movingImage">
+            <img src="images/name.png" alt="합격자 명단">
+            <img src="images/name.png" alt="합격자 명단">
         </div>
     </div>
 
     <div class="button-container">
-        <button type="button" onclick="member">로그인 하기</button>
-        <button class="button1" onclick="nonmember()">비회원 이용</button>
+        <button onclick="showLogin()">로그인 하기</button>
+        <button onclick="nonmember()">비회원 이용</button>
+    </div>
+
+    <div class="login-container" id="loginContainer">
+        <h3>로그인</h3>
+        <input type="text" id="username" placeholder="아이디를 입력하세요">
+        <input type="password" id="password" placeholder="비밀번호를 입력하세요">
+        <button onclick="login()">로그인</button>
+        <button onclick="signup()">회원가입</button>
+        <div class="message" id="loginMessage"></div>
     </div>
 
     <script>
+        // 로그인 창 보이기
+        function showLogin() {
+            const loginContainer = document.getElementById('loginContainer');
+            loginContainer.style.display = 'flex';
+        }
+        //로그인 하기
+        function login() {
+        window.location.href = "name.html";
+        }
+        //회원가입
+        function signup() {
+        window.location.href = "name1.html";
+    }
+
+        // 비회원 이용
         function nonmember() {
             window.location.href = "name.html";
         }
+
+        // 사용자 등록 함수 (회원가입)
+        function register() {
+             const userId = document.getElementById("userIdInput").value.trim();
+            const password = document.getElementById("passwordInput").value.trim();
+
+    if (!userId || !password) {
+        alert("모든 정보를 입력해주세요!");
+        return;
+    }
+
+    let users = localStorage.getItem("users");
+    users = users ? JSON.parse(users) : [];
+
+    if (users.some(user => user.userId === userId)) {
+        alert("이미 존재하는 아이디입니다.");
+        return;
+    }
+
+    users.push({ userId, password });
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("회원가입이 완료되었습니다!");
+}
+
+
+         
     </script>
 </body>
-
 </html>

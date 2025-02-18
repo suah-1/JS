@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 150px;
+            background-color: #FFF1FA;
+        }
+        .home-button {
+            cursor: pointer;
+            transform: translateY(-150px);
+            text-align: left;
+        }
+        .home-button button {
+            cursor: pointer;
+            background-color: #FFF1FA;
+            border: none;
+        }
+        .home-button button:hover {
+            background-color: deeppink;
+        }
+        .container {
+            background-color: white;
+            width: 300px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #5f6368;
+            border-radius: 5px;
+        }
+        .container button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background-color: deeppink;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <div class="home-button">
+        <button class="homebutton" onclick="home()">
+            <svg xmlns="http://www.w3.org/2000/svg" height="50px" viewBox="0 -960 960 960" width="50px" fill="#5f6368">
+                <path d="M160-120v-480l320-240 320 240v480H560v-280H400v280H160Z" />
+            </svg>
+        </button>
+    </div>
+    <div class="container">
+        <h2>회원가입</h2>
+        <input type="text" id="userIdInput" placeholder="아이디 입력">
+        <input type="password" id="passwordInput" placeholder="비밀번호 입력">
+        <button onclick="register()">회원가입</button>
+    </div>
+    <script>
+        function home() {
+            window.location.href = "home.html";
+        }
+        function register() {
+            const userId = document.getElementById("userIdInput").value.trim();
+            const password = document.getElementById("passwordInput").value.trim();
+            if (!userId || !password) {
+                alert("모든 정보를 입력해주세요!");
+                return;
+            }
+            let existingUsers = localStorage.getItem("users");
+            existingUsers = existingUsers ? JSON.parse(existingUsers) : [];
+
+            //아이디 중복 체크
+            if (existingUsers.some(user => user.userId === userId)) {
+                alert("이미 존재하는 아이디입니다. 다른 아이디를 사용해주세요.");
+                return;
+            }
+            //사용자 추가
+            const newUser = { username: userId, password: password };
+            existingUsers.push(newUser);
+
+            localStorage.setItem("users", JSON.stringify(existingUsers));
+            //json 파일로 저장
+            const jsonData = JSON.stringify(existingUsers, null, 2);
+            const blob = new Blob([jsonData], { type: "application/json" });
+            const a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = "user_data.json";
+            a.click();
+
+            alert("회원가입이 완료되었습니다!");
+            window.location.href = "home.html";
+        }
+    </script>
+</body>
+</html>

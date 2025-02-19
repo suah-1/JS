@@ -82,25 +82,19 @@
             }
             let existingUsers = localStorage.getItem("users");
             existingUsers = existingUsers ? JSON.parse(existingUsers) : [];
-
-            //아이디 중복 체크
             if (existingUsers.some(user => user.userId === userId)) {
                 alert("이미 존재하는 아이디입니다. 다른 아이디를 사용해주세요.");
                 return;
             }
-            //사용자 추가
-            const newUser = { username: userId, password: password };
-            existingUsers.push(newUser);
-
+            const userData = { userId, password };
+            existingUsers.push(userData);
             localStorage.setItem("users", JSON.stringify(existingUsers));
-            //json 파일로 저장
             const jsonData = JSON.stringify(existingUsers, null, 2);
             const blob = new Blob([jsonData], { type: "application/json" });
             const a = document.createElement("a");
             a.href = URL.createObjectURL(blob);
             a.download = "user_data.json";
             a.click();
-
             alert("회원가입이 완료되었습니다!");
             window.location.href = "home.html";
         }

@@ -136,10 +136,10 @@
             color: white;
             border: none;
             padding: 10px;
+            margin-bottom: 10px;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            margin-bottom: 10px;
         }
 
         .login-container button:hover {
@@ -195,8 +195,21 @@
         }
         //로그인 하기
         function login() {
-        window.location.href = "name.html";
+        const userId = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        let existingUsers = localStorage.getItem('users');
+        existingUsers = existingUsers ? JSON.parse(existingUsers) : [];
+
+        const user = existingUsers.find(user => user.userId === userId && user.password === password);
+
+        if (user) {
+            alert("로그인 성공!");
+            window.location.href = "name.html";
+        } else {
+            alert("아이디 또는 비밀번호가 틀렸습니다.");
         }
+    }
         //회원가입
         function signup() {
         window.location.href = "name1.html";
@@ -232,8 +245,7 @@
         alert("회원가입이 완료되었습니다!");
         window.location.href = "home.html";
     }
-
-         
+    
     </script>
 </body>
 </html>
